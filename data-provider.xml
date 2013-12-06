@@ -12,13 +12,13 @@
       <userName>user1</userName>
       <passWord>pass1</passWord>
       <environment>Staging</environment>
-      <clientIDP>idp_test_psearch</clientIDP>
+      <clientIDP>test</clientIDP>
       <role>member</role>
       <view>New Window</view>
       <specialty>General Medicine</specialty>
       <brand>South Carolina</brand>
-      <startingLocation>100 SW Market,Portland,OR,97201,US</startingLocation>
-      <searchArea>Columbia,SC</searchArea>
+      <startingLocation>100 SW Market, Portland, OR, 97201, US</startingLocation>
+      <searchArea>Columbia, SC</searchArea>
       <nameQuery>Parker, Peter</nameQuery>
       <verifyList>
         <items>
@@ -39,13 +39,13 @@
       <userName>user2</userName>
       <passWord>pass2</passWord>
       <environment>Staging</environment>
-      <clientIDP>idp_test_psearch</clientIDP>
+      <clientIDP>test</clientIDP>
       <role>member</role>
       <view>New Window</view>
       <specialty>General Medicine</specialty>
       <brand>South Carolina</brand>
-      <startingLocation>100 SW Market,Portland,OR,97201,US</startingLocation>
-      <searchArea>Columbia,SC</searchArea>
+      <startingLocation>100 SW Market, Portland, OR, 97201, US</startingLocation>
+      <searchArea>Columbia, SC</searchArea>
       <nameQuery>Pumpkin, Peter</nameQuery>
       <verifyList>
         <items>

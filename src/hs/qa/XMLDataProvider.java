@@ -11,10 +11,11 @@ import com.thoughtworks.xstream.XStream;
 
 public class XMLDataProvider {
 	
-	public TestSuite ts;
+	private TestSuite ts;
+	private static String testNGFile = "data-provider.xml";
 	
 	public static void main( String[] args) {
-		new XMLDataProvider("input.xml");
+		new XMLDataProvider( testNGFile );
 	}
 	
 	public XMLDataProvider( String fileName ) {		
@@ -34,10 +35,10 @@ public class XMLDataProvider {
     		xStream.processAnnotations(TestSuite.class);
     		xStream.processAnnotations(TestCase.class);
     		xStream.processAnnotations(MultiItems.class);
-    		Object readObject = xStream.fromXML( new File("input.xml") );
+    		Object readObject = xStream.fromXML( new File( testNGFile ) );
     		ts = (TestSuite)readObject;
         }
-		printSuite();
+		printSuiteVertical();
 	}
 	
 	public String getTestNameByIndex( int idx ) {
@@ -52,7 +53,8 @@ public class XMLDataProvider {
 		return ts.getTestByIndex( idx ).getEnabled();
 	}
 	
-	public void printSuite() {
+	public void printSuiteVertical() {
+		System.out.println("Suite:\n---------------");
 		System.out.println("SauceLabs URL: " + ts.getSauceURL() );
 		for ( int i = 0; i < ts.size(); i++ ) {
 			System.out.println("---------------");
@@ -139,18 +141,19 @@ public class XMLDataProvider {
 		return ts.getTestByIndex(idx).getEnvFlag();
 	}
 
-	public void createDefaultSuiteFile( File testXML ) {
-
+	public void createDefaultSuiteFile( File testXML ) 
+	{
         TestSuite mySuite = new TestSuite( "Test 1", "http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub" );
         mySuite.add( new TestCase( true, "Test 1", "INTFED", "Grid", "Firefox", "http://google.com", "user1", "pass1", "Staging", 
-        		"idp_test_psearch", "member", "New Window", "General Medicine", "South Carolina", "100 SW Market,Portland,OR,97201,US",
-        		"Columbia,SC", "Parker, Peter", "Spiderman, Batman, Superman" ) );
+        		"test", "member", "New Window", "General Medicine", "South Carolina", "100 SW Market, Portland, OR, 97201, US",
+        		"Columbia, SC", "Parker, Peter", "Spiderman, Batman, Superman" ) );
         mySuite.add( new TestCase( true, "Test 2", "INTFED", "Grid", "Chrome", "http://google.com", "user2", "pass2", "Staging", 
-        		"idp_test_psearch", "member", "New Window", "General Medicine", "South Carolina", "100 SW Market,Portland,OR,97201,US",
-        		"Columbia,SC", "Pumpkin, Peter", "Spiderman, Batman, Wonder Woman") );
+        		"test", "member", "New Window", "General Medicine", "South Carolina", "100 SW Market, Portland, OR, 97201, US",
+        		"Columbia, SC", "Pumpkin, Peter", "Spiderman, Batman, Wonder Woman") );
         XStream xstream = new XStream();
-        xstream.alias("suite", TestSuite.class);
-        xstream.alias("test", TestCase.class);
+        xstream.alias( "suite", TestSuite.class );
+        xstream.alias( "test", TestCase.class );
+        //xstream.alias( "list", MultiItems.class );
         String xml = xstream.toXML( mySuite );
         System.out.println( xml );
 		FileWriter fw;
@@ -158,9 +161,10 @@ public class XMLDataProvider {
 			fw = new FileWriter( testXML );
 			fw.append( xml );
 			fw.close();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch ( IOException ioe ) {
+			ioe.printStackTrace();
 		}
+		ts = mySuite;
 	}
 	
 }

@@ -1,7 +1,7 @@
-TestNGXStreamDataProvider
+testng-dataprovider-xstream-xml
 =========================
 
-A concept DataProvider for XML and TestNG runners.
+A conceptual TestNG DataProvider using XStream to serialize XML.
 
 Run with the Maven goal:  exec:java 
 

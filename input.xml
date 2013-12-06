@@ -1,0 +1,60 @@
+<suite>
+  <suiteName>Test 1</suiteName>
+  <sauceURL>http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub</sauceURL>
+  <tests>
+    <test>
+      <enabled>true</enabled>
+      <testName>Test 1</testName>
+      <envFlag>INTFED</envFlag>
+      <locale>Grid</locale>
+      <browser>Firefox</browser>
+      <appUrl>http://google.com</appUrl>
+      <userName>user1</userName>
+      <passWord>pass1</passWord>
+      <environment>Staging</environment>
+      <clientIDP>idp_test_psearch</clientIDP>
+      <role>member</role>
+      <view>New Window</view>
+      <specialty>General Medicine</specialty>
+      <brand>South Carolina</brand>
+      <startingLocation>100 SW Market,Portland,OR,97201,US</startingLocation>
+      <searchArea>Columbia,SC</searchArea>
+      <nameQuery>Parker, Peter</nameQuery>
+      <verifyList>
+        <items>
+          <string>Spiderman</string>
+          <string>Batman</string>
+          <string>Superman</string>
+        </items>
+        <token>,</token>
+      </verifyList>
+    </test>
+    <test>
+      <enabled>true</enabled>
+      <testName>Test 2</testName>
+      <envFlag>INTFED</envFlag>
+      <locale>Grid</locale>
+      <browser>Chrome</browser>
+      <appUrl>http://google.com</appUrl>
+      <userName>user2</userName>
+      <passWord>pass2</passWord>
+      <environment>Staging</environment>
+      <clientIDP>idp_test_psearch</clientIDP>
+      <role>member</role>
+      <view>New Window</view>
+      <specialty>General Medicine</specialty>
+      <brand>South Carolina</brand>
+      <startingLocation>100 SW Market,Portland,OR,97201,US</startingLocation>
+      <searchArea>Columbia,SC</searchArea>
+      <nameQuery>Pumpkin, Peter</nameQuery>
+      <verifyList>
+        <items>
+          <string>Spiderman</string>
+          <string>Batman</string>
+          <string>Wonder Woman</string>
+        </items>
+        <token>,</token>
+      </verifyList>
+    </test>
+  </tests>
+</suite>

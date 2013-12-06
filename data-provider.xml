@@ -5,19 +5,19 @@
     <test>
       <enabled>true</enabled>
       <testName>Test 1</testName>
-      <envFlag>INTFED</envFlag>
+      <envFlag>portal1</envFlag>
       <locale>Grid</locale>
       <browser>Firefox</browser>
-      <appUrl>http://google.com</appUrl>
+      <appUrl>http://mywebsite.com</appUrl>
       <userName>user1</userName>
       <passWord>pass1</passWord>
       <environment>Staging</environment>
-      <clientIDP>test</clientIDP>
+      <clientIDP>test1</clientIDP>
       <role>member</role>
       <view>New Window</view>
-      <specialty>General Medicine</specialty>
-      <brand>South Carolina</brand>
-      <startingLocation>100 SW Market, Portland, OR, 97201, US</startingLocation>
+      <specialty>Extraterrestrial Biology</specialty>
+      <brand>Texas</brand>
+      <startingLocation>12345 Main St., Cheyenne, WY, 82001, US</startingLocation>
       <searchArea>Columbia, SC</searchArea>
       <nameQuery>Parker, Peter</nameQuery>
       <verifyList>
@@ -32,19 +32,19 @@
     <test>
       <enabled>true</enabled>
       <testName>Test 2</testName>
-      <envFlag>INTFED</envFlag>
-      <locale>Grid</locale>
+      <envFlag>portal2</envFlag>
+      <locale>Local</locale>
       <browser>Chrome</browser>
-      <appUrl>http://google.com</appUrl>
+      <appUrl>http://mywebsite.com</appUrl>
       <userName>user2</userName>
       <passWord>pass2</passWord>
       <environment>Staging</environment>
-      <clientIDP>test</clientIDP>
-      <role>member</role>
+      <clientIDP>test2</clientIDP>
+      <role>federated</role>
       <view>New Window</view>
-      <specialty>General Medicine</specialty>
-      <brand>South Carolina</brand>
-      <startingLocation>100 SW Market, Portland, OR, 97201, US</startingLocation>
+      <specialty>Extraterrestrial Biology</specialty>
+      <brand>Texas</brand>
+      <startingLocation>12345 Main St., Cheyenne, WY, 82001, US</startingLocation>
       <searchArea>Columbia, SC</searchArea>
       <nameQuery>Pumpkin, Peter</nameQuery>
       <verifyList>

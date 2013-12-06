@@ -151,11 +151,11 @@ public class XMLDataProvider {
 	public void createDefaultSuiteFile( File testXML ) 
 	{
         TestSuite mySuite = new TestSuite( "Test 1", "http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub" );
-        mySuite.add( new TestCase( true, "Test 1", "INTFED", "Grid", "Firefox", "http://google.com", "user1", "pass1", "Staging", 
-        		"test", "member", "New Window", "General Medicine", "South Carolina", "100 SW Market, Portland, OR, 97201, US",
+        mySuite.add( new TestCase( true, "Test 1", "portal1", "Grid", "Firefox", "http://mywebsite.com", "user1", "pass1", "Staging", 
+        		"test1", "member", "New Window", "Extraterrestrial Biology", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
         		"Columbia, SC", "Parker, Peter", "Spiderman, Batman, Superman" ) );
-        mySuite.add( new TestCase( true, "Test 2", "INTFED", "Grid", "Chrome", "http://google.com", "user2", "pass2", "Staging", 
-        		"test", "member", "New Window", "General Medicine", "South Carolina", "100 SW Market, Portland, OR, 97201, US",
+        mySuite.add( new TestCase( true, "Test 2", "portal2", "Local", "Chrome", "http://mywebsite.com", "user2", "pass2", "Staging", 
+        		"test2", "federated", "New Window", "Extraterrestrial Biology", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
         		"Columbia, SC", "Pumpkin, Peter", "Spiderman, Batman, Wonder Woman") );
         XStream xstream = new XStream();
         xstream.alias( "suite", TestSuite.class );

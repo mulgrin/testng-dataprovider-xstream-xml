@@ -17,6 +17,13 @@ public class XMLDataProvider {
 	public static void main( String[] args) {
 		new XMLDataProvider( testNGFile );
 	}
+
+	// TODO Implement method to return data to TestNG DataProvider
+    public Object[][] getTestData() {
+        return new Object[][] {
+            { "Cedric", new Integer(36) },
+            { "Anne", new Integer(37)} }; 
+    }
 	
 	public XMLDataProvider( String fileName ) {		
 		File testXML = new File( fileName );

@@ -18,14 +18,26 @@ public class TestSuite {
         tests.add( test );
     }
     
+    public List<TestCase> getAllTests() {
+        return tests;
+    }
+    
+    public String getSauceURL() {
+		return sauceURL;
+	}
+
+    public String getSuiteName() {
+		return suiteName;
+	}
+    
     public TestCase getTestByIndex( int idx ) {
     	if ( idx > tests.size() || idx < 0 ) {
     		throw new IndexOutOfBoundsException("Index " + idx + " was beyond the range of " + tests.size() + " test cases." );
     	}
     	return tests.get( idx );
     }
-    
-    public TestCase getTestByName( String name ) {
+
+	public TestCase getTestByName( String name ) {
     	boolean found = false;
     	String testName = "null";
     	TestCase test = null;
@@ -45,20 +57,8 @@ public class TestSuite {
     	}
     }
 
-    public List<TestCase> getAllTests() {
-        return tests;
-    }
-    
-    public int size() {
+	public int size() {
 		return tests.size();    	
     }
-
-	public String getSuiteName() {
-		return suiteName;
-	}
-
-	public String getSauceURL() {
-		return sauceURL;
-	}
 
 }

@@ -34,7 +34,7 @@ public class XMLTestDataProvider {
     		ts = (TestSuite)readObject;
         }
 		printSuiteVertical();
-	}
+	}	
 	
 	public void createDefaultSuiteFile( File testXML ) 
 	{
@@ -118,13 +118,6 @@ public class XMLTestDataProvider {
 		return ts.getTestByIndex(idx).getStartingLocation();
 	}
 
-	// TODO Implement method to return data to TestNG DataProvider
-    public Object[][] getTestData() {
-        return new Object[][] {
-            { "Cedric", new Integer(36) },
-            { "Anne", new Integer(37)} }; 
-    }
-
 	public String getTestNameByIndex( int idx ) {
 		return ts.getAllTests().get( idx ).getName();
 	}
@@ -167,6 +160,20 @@ public class XMLTestDataProvider {
 			System.out.println("Verify list: " + StringUtils.join( lst, "," ) );
 		}
 		System.out.println("---------------\n");
-	}
+	}	
+
+	/**
+	 * This is the TestNG DataProvider implementation
+	 * Should return an Object[][] or Iterator<Object[]> data type
+	 * @return
+	 */
+    public Object[][] getEighteenColumnData() {
+    	Object[][] data = new Object[ts.size()][2];
+    	for ( int i = 0; i < ts.size(); i++ ) {
+    		data[i][0] = getEnabledByIndex(i);
+    		data[i][1] = getTestNameByIndex(i);
+    	}
+    	return data;
+    }
 	
 }

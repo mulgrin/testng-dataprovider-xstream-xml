@@ -5,17 +5,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.thoughtworks.xstream.XStream;
 
 public class XMLTestDataProvider {
 	
-	private TestSuite ts;
+	private TestSuite testSuite;
 
 	public XMLTestDataProvider( String fileName ) {		
 		File testXML = new File( fileName );
         if ( !testXML.exists() ) {
+        	System.out.println("Generating new default test data in xml file '" + fileName +  "'..." );
         	try {
 				testXML.createNewFile();
 				createDefaultSuiteFile( testXML );
@@ -23,7 +22,7 @@ public class XMLTestDataProvider {
 				e.printStackTrace();
 			}
         } else {
-        	System.out.println("Suite file already exists.  Loading test contents...\n");
+        	System.out.println("Loading test data from xml file '" + fileName +  "'..." );
         	XStream xStream = new XStream();
     		xStream.alias("suite", TestSuite.class);
             xStream.alias("test", TestCase.class);
@@ -31,19 +30,18 @@ public class XMLTestDataProvider {
     		xStream.processAnnotations(TestCase.class);
     		xStream.processAnnotations(MultiItems.class);
     		Object readObject = xStream.fromXML( testXML );
-    		ts = (TestSuite)readObject;
+    		testSuite = (TestSuite)readObject;
         }
-		printSuiteVertical();
 	}	
 	
 	public void createDefaultSuiteFile( File testXML ) 
 	{
         TestSuite mySuite = new TestSuite( "Test 1", "http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub" );
         mySuite.add( new TestCase( true, "Test 1", "portal1", "Grid", "Firefox", "http://mywebsite.com", "user1", "pass1", "Staging", 
-        		"test1", "member", "New Window", "Extraterrestrial Biology", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
-        		"Columbia, SC", "Parker, Peter", "Spiderman, Batman, Superman" ) );
-        mySuite.add( new TestCase( true, "Test 2", "portal2", "Local", "Chrome", "http://mywebsite.com", "user2", "pass2", "Staging", 
-        		"test2", "federated", "New Window", "Extraterrestrial Biology", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
+        		"test1", "member", "New Window", "Biology", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
+        		"Columbia, SC", "Parker, Peter", "Wolverine, Batman, Superman" ) );
+        mySuite.add( new TestCase( true, "Test 2", "portal2", "Local", "Chrome", "http://mywebsite.com", "user2", "pass2", "Integration", 
+        		"test2", "federated", "New Window", "Chemistry", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
         		"Columbia, SC", "Pumpkin, Peter", "Spiderman, Batman, Wonder Woman") );
         XStream xstream = new XStream();
         xstream.alias( "suite", TestSuite.class );
@@ -59,108 +57,80 @@ public class XMLTestDataProvider {
 		} catch ( IOException ioe ) {
 			ioe.printStackTrace();
 		}
-		ts = mySuite;
+		testSuite = mySuite;
 	}
 	
 	private String getAppUrlByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getAppUrl();
+		return testSuite.getTestByIndex(idx).getAppUrl();
 	}
 	
 	private String getBrandByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getBrand();
+		return testSuite.getTestByIndex(idx).getBrand();
 	}
 	
 	private String getBrowserByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getBrowser();
+		return testSuite.getTestByIndex(idx).getBrowser();
 	}
 	
 	private String getClientByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getClientIDP();
+		return testSuite.getTestByIndex(idx).getClientIDP();
 	}
 
 	public Boolean getEnabledByIndex( int idx ) {
-		return ts.getTestByIndex( idx ).getEnabled();
+		return testSuite.getTestByIndex( idx ).getEnabled();
 	}
 
 	private String getEnvFlagByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getEnvFlag();
+		return testSuite.getTestByIndex(idx).getEnvFlag();
 	}
 
 	private String getEnvironmentByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getEnvironment();
+		return testSuite.getTestByIndex(idx).getEnvironment();
 	}
 
 	private String getLocaleByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getLocale();
+		return testSuite.getTestByIndex(idx).getLocale();
 	}
 
 	private String getNameQueryByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getNameQuery();
+		return testSuite.getTestByIndex(idx).getNameQuery();
 	}
 
 	private String getPasswordByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getPassWord();
+		return testSuite.getTestByIndex(idx).getPassWord();
 	}
 
 	private String getRoleByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getRole();
+		return testSuite.getTestByIndex(idx).getRole();
 	}
 
 	private String getSearchAreaByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getSearchArea();
+		return testSuite.getTestByIndex(idx).getSearchArea();
 	}
 
 	private String getSpecialtyByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getSpecialty();
+		return testSuite.getTestByIndex(idx).getSpecialty();
 	}
 
 	private String getStartLocationByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getStartingLocation();
+		return testSuite.getTestByIndex(idx).getStartingLocation();
 	}
 
 	public String getTestNameByIndex( int idx ) {
-		return ts.getAllTests().get( idx ).getName();
+		return testSuite.getAllTests().get( idx ).getName();
 	}
 
 	private String getUsernameByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getUserName();
+		return testSuite.getTestByIndex(idx).getUserName();
 	}
 
 	public List<String> getVerifyListByIndex( int idx ) {		
-		return ts.getTestByIndex( idx ).getVerifyList();	
+		return testSuite.getTestByIndex( idx ).getVerifyList();	
 	}
 
 	private String getViewByIndex( int idx ) {
-		return ts.getTestByIndex(idx).getView();
+		return testSuite.getTestByIndex(idx).getView();
 	}
-
-	public void printSuiteVertical() {
-		System.out.println("Suite:\n---------------");
-		System.out.println("SauceLabs URL: " + ts.getSauceURL() );
-		for ( int i = 0; i < ts.size(); i++ ) {
-			System.out.println("---------------");
-			System.out.println("Enabled: " + getEnabledByIndex(i) );
-			System.out.println("Test name: " + getTestNameByIndex(i) );
-			System.out.println("Flag: " + getEnvFlagByIndex(i) );
-			System.out.println("Locale: " + getLocaleByIndex(i) );
-			System.out.println("Browser: " + getBrowserByIndex(i) );
-			System.out.println("App URL: " + getAppUrlByIndex(i) );
-			System.out.println("Username: " + getUsernameByIndex(i) );
-			System.out.println("Password: " + getPasswordByIndex(i) );
-			System.out.println("Environment: " + getEnvironmentByIndex(i) );
-			System.out.println("Client: " + getClientByIndex(i) );
-			System.out.println("Role: " + getRoleByIndex(i) );
-			System.out.println("View: " + getViewByIndex(i) );
-			System.out.println("Specialty: " + getSpecialtyByIndex(i) );
-			System.out.println("Brand: " + getBrandByIndex(i) );
-			System.out.println("Start location: " + getStartLocationByIndex(i) );
-			System.out.println("Search area: " + getSearchAreaByIndex(i) );
-			System.out.println("Name query: " + getNameQueryByIndex(i) );
-			List<String> lst = getVerifyListByIndex(i);
-			System.out.println("Verify list: " + StringUtils.join( lst, "," ) );
-		}
-		System.out.println("---------------\n");
-	}	
 
 	/**
 	 * This is the TestNG DataProvider implementation
@@ -168,11 +138,26 @@ public class XMLTestDataProvider {
 	 * @return
 	 */
     public Object[][] getEighteenColumnData() {
-    	Object[][] data = new Object[ts.size()][2];
-    	for ( int i = 0; i < ts.size(); i++ ) {
+    	Object[][] data = new Object[testSuite.size()][18];
+    	for ( int i = 0; i < testSuite.size(); i++ ) {
     		data[i][0] = getEnabledByIndex(i);
     		data[i][1] = getTestNameByIndex(i);
-    		// more to add
+    		data[i][2] = getEnvFlagByIndex(i);
+    		data[i][3] = getLocaleByIndex(i);
+    		data[i][4] = getBrowserByIndex(i);
+    		data[i][5] = getAppUrlByIndex(i);
+    		data[i][6] = getUsernameByIndex(i);
+    		data[i][7] = getPasswordByIndex(i);
+    		data[i][8] = getEnvironmentByIndex(i);
+    		data[i][9] = getClientByIndex(i);
+    		data[i][10] = getRoleByIndex(i);
+    		data[i][11] = getViewByIndex(i);
+    		data[i][12] = getSpecialtyByIndex(i);
+    		data[i][13] = getBrandByIndex(i);
+    		data[i][14] = getStartLocationByIndex(i);
+    		data[i][15] = getSearchAreaByIndex(i);
+    		data[i][16] = getNameQueryByIndex(i);
+    		data[i][17] = getVerifyListByIndex(i);
     	}
     	return data;
     }

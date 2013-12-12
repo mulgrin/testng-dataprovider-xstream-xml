@@ -1,4 +1,4 @@
-package hs.qa;
+package qa.dataprovider;
 
 import java.io.File;
 import java.io.FileWriter;

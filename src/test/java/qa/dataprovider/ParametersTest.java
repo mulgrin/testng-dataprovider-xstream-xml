@@ -1,4 +1,4 @@
-package hs.qa;
+package qa.dataprovider;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import qa.dataprovider.XMLTestDataProvider;
 
 public class ParametersTest {
 	

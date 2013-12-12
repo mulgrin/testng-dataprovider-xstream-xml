@@ -1,4 +1,4 @@
-package hs.qa;
+package qa.dataprovider;
 
 import java.util.Arrays;
 import java.util.List;

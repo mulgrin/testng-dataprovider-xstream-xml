@@ -3,7 +3,17 @@ package qa.dataprovider;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+
+import net.entropysoft.transmorph.ConverterException;
+import net.entropysoft.transmorph.DefaultConverters;
+import net.entropysoft.transmorph.Transmorph;
+import qa.dataprovider.def.OptionalArgs;
+import qa.dataprovider.def.RequiredArgs;
+import qa.dataprovider.def.StringPack;
+import qa.dataprovider.def.TestCase;
+import qa.dataprovider.def.TestSuite;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -26,9 +36,13 @@ public class XMLTestDataProvider {
         	XStream xStream = new XStream();
     		xStream.alias("suite", TestSuite.class);
             xStream.alias("test", TestCase.class);
+            xStream.alias( "reqs", RequiredArgs.class );
+            xStream.alias( "opts", OptionalArgs.class );
     		xStream.processAnnotations(TestSuite.class);
     		xStream.processAnnotations(TestCase.class);
-    		xStream.processAnnotations(MultiItems.class);
+    		xStream.processAnnotations(StringPack.class);
+    		xStream.processAnnotations(RequiredArgs.class);
+    		xStream.processAnnotations(OptionalArgs.class);
     		Object readObject = xStream.fromXML( testXML );
     		testSuite = (TestSuite)readObject;
         }
@@ -37,16 +51,20 @@ public class XMLTestDataProvider {
 	public void createDefaultSuiteFile( File testXML ) 
 	{
         TestSuite mySuite = new TestSuite( "Test 1", "http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub" );
-        mySuite.add( new TestCase( true, "Test 1", "portal1", "Grid", "Firefox", "http://mywebsite.com", "user1", "pass1", "Staging", 
-        		"test1", "member", "New Window", "Biology", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
+        
+        mySuite.add( new RequiredArgs( true, "Test 1", "portal1", "Grid", "Firefox" ), new OptionalArgs( "http://mywebsite1.com", 
+        		"user1", "pass1", "Staging", "test1", "member", "New Window", "Biology", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
         		"Columbia, SC", "Parker, Peter", "Wolverine, Batman, Superman" ) );
-        mySuite.add( new TestCase( true, "Test 2", "portal2", "Local", "Chrome", "http://mywebsite.com", "user2", "pass2", "Integration", 
-        		"test2", "federated", "New Window", "Chemistry", "Texas", "12345 Main St., Cheyenne, WY, 82001, US",
-        		"Columbia, SC", "Pumpkin, Peter", "Spiderman, Batman, Wonder Woman") );
+        
+        mySuite.add( new RequiredArgs( true, "Test 2", "portal2", "Grid", "Firefox" ), new OptionalArgs( "http://mywebsite2.com", 
+        		"user2", "pass2", "Production", "test1", "federated", "New Window", "Biology", "Texas", "67890 Minor St., Cheyenne, WY, 82001, US",
+        		"New York, NY", "Doe, John", "Silver Surfer, Robin, Thing" ) );
+        
         XStream xstream = new XStream();
         xstream.alias( "suite", TestSuite.class );
         xstream.alias( "test", TestCase.class );
-        //xstream.alias( "list", MultiItems.class );
+        xstream.alias( "reqs", RequiredArgs.class );
+        xstream.alias( "opts", OptionalArgs.class );
         String xml = xstream.toXML( mySuite );
         System.out.println( xml );
 		FileWriter fw;
@@ -60,106 +78,75 @@ public class XMLTestDataProvider {
 		testSuite = mySuite;
 	}
 	
-	private String getAppUrlByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getAppUrl();
-	}
-	
-	private String getBrandByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getBrand();
-	}
-	
-	private String getBrowserByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getBrowser();
-	}
-	
-	private String getClientByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getClientIDP();
+	public String getBrowserByIndex( int idx ) {
+		return this.getReqArgs(idx).getBrowser();
 	}
 
 	public Boolean getEnabledByIndex( int idx ) {
-		return testSuite.getTestByIndex( idx ).getEnabled();
+		return this.getReqArgs(idx).getEnabled();
 	}
 
-	private String getEnvFlagByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getEnvFlag();
+	public String getEnvironmentByIndex( int idx ) {
+		return this.getReqArgs(idx).getEnvironment();
 	}
 
-	private String getEnvironmentByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getEnvironment();
-	}
-
-	private String getLocaleByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getLocale();
-	}
-
-	private String getNameQueryByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getNameQuery();
-	}
-
-	private String getPasswordByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getPassWord();
-	}
-
-	private String getRoleByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getRole();
-	}
-
-	private String getSearchAreaByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getSearchArea();
-	}
-
-	private String getSpecialtyByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getSpecialty();
-	}
-
-	private String getStartLocationByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getStartingLocation();
+	public String getTestLocaleByIndex( int idx ) {
+		return this.getReqArgs(idx).getTestLocale();
 	}
 
 	public String getTestNameByIndex( int idx ) {
-		return testSuite.getAllTests().get( idx ).getName();
-	}
-
-	private String getUsernameByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getUserName();
-	}
-
-	public List<String> getVerifyListByIndex( int idx ) {		
-		return testSuite.getTestByIndex( idx ).getVerifyList();	
-	}
-
-	private String getViewByIndex( int idx ) {
-		return testSuite.getTestByIndex(idx).getView();
+		return this.getReqArgs(idx).getTestName();
 	}
 
 	/**
-	 * This is the TestNG DataProvider implementation
+	 * This is a TestNG DataProvider implementation
 	 * Should return an Object[][] or Iterator<Object[]> data type
 	 * @return
 	 */
-    public Object[][] getEighteenColumnData() {
-    	Object[][] data = new Object[testSuite.size()][18];
+    public Object[][] getCompactData() { 
+    	Object[][] array = new Object[testSuite.size()][2];
     	for ( int i = 0; i < testSuite.size(); i++ ) {
-    		data[i][0] = getEnabledByIndex(i);
-    		data[i][1] = getTestNameByIndex(i);
-    		data[i][2] = getEnvFlagByIndex(i);
-    		data[i][3] = getLocaleByIndex(i);
-    		data[i][4] = getBrowserByIndex(i);
-    		data[i][5] = getAppUrlByIndex(i);
-    		data[i][6] = getUsernameByIndex(i);
-    		data[i][7] = getPasswordByIndex(i);
-    		data[i][8] = getEnvironmentByIndex(i);
-    		data[i][9] = getClientByIndex(i);
-    		data[i][10] = getRoleByIndex(i);
-    		data[i][11] = getViewByIndex(i);
-    		data[i][12] = getSpecialtyByIndex(i);
-    		data[i][13] = getBrandByIndex(i);
-    		data[i][14] = getStartLocationByIndex(i);
-    		data[i][15] = getSearchAreaByIndex(i);
-    		data[i][16] = getNameQueryByIndex(i);
-    		data[i][17] = getVerifyListByIndex(i);
+    		RequiredArgs reqa = getReqArgs(i);
+    		array[i][0] = reqa;
+        	OptionalArgs opta = getOptArgs(i);
+        	array[i][1] = opta;
     	}
-    	return data;
+    	return array;
     }
+    
+	/**
+	 * This is a TestNG DataProvider implementation
+	 * Should return an Object[][] or Iterator<Object[]> data type
+	 * @return
+	 */
+    public Object[][] getAllRowsInOneArray() {    	
+    	List<Object> lo = new ArrayList<Object>();
+    	for ( int i = 0; i < testSuite.size(); i++ ) {
+    		RequiredArgs reqa = getReqArgs(i);
+        	OptionalArgs opta = getOptArgs(i);
+        	for ( Object m: reqa ) {
+        		lo.add( m );
+        	}
+        	for ( Object p: opta ) {
+        		lo.add( p );
+        	}
+    	}
+    	Transmorph transmorph = new Transmorph( new DefaultConverters() );
+    	Object[][] array = null;
+		try {
+			array = transmorph.convert( lo, Object[][].class);
+		} catch ( ConverterException e ) {
+			e.printStackTrace();
+		}
+    	return array;
+    }
+
+	private RequiredArgs getReqArgs( int testIdx ) {
+		return testSuite.getAllTests().get( testIdx ).getReqArgs();
+	}
+	
+	private OptionalArgs getOptArgs( int testIdx ) {		
+		return testSuite.getAllTests().get( testIdx ).getOptArgs();
+	}
 	
 }

@@ -1,4 +1,4 @@
-package qa.dataprovider;
+package qa.dataprovider.def;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class TestSuite {
     	String testName = "null";
     	TestCase test = null;
     	for ( TestCase tc: tests ) {
-    		testName = tc.getName();
+    		testName = tc.getReqArgs().getTestName();
     		if ( testName.equalsIgnoreCase( name ) ) {
     			found = true;
     			test = tc;
@@ -60,5 +60,10 @@ public class TestSuite {
 	public int size() {
 		return tests.size();    	
     }
+
+	public void add(RequiredArgs requiredArgs, OptionalArgs optionalArgs) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

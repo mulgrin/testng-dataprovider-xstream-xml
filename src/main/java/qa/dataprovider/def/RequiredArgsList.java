@@ -2,18 +2,17 @@ package qa.dataprovider.def;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 
 public class RequiredArgsList {
 	
 	private List<Object> argsWrapper;
-	private String token = ",";
-	
-	private Boolean enabled;
-	private String testName;
-	private String environment;
-	private String testLocale; // grid or local
-	private String browser;
+	//private Boolean enabled;
+	//private String testName;
+	//private String environment;
+	//private String testLocale; // grid or local
+	//private String browser;
 	
 	public RequiredArgsList() {
 		setReqArgs( new ArrayList<Object>() );
@@ -25,15 +24,15 @@ public class RequiredArgsList {
 	public RequiredArgsList( Boolean en, String name, String env, String locale, String browser ) {
 		List<Object> lo = new ArrayList<Object>();
 		lo.add( en );
-		this.enabled = en;
+		//this.enabled = en;
 		lo.add( name );
-		this.testName = name;
+		//this.testName = name;
 		lo.add( env );
-		this.environment = env;
+		//this.environment = env;
 		lo.add( locale );
-		this.testLocale = locale;
+		//this.testLocale = locale;
 		lo.add( browser );
-		this.browser = browser;
+		//this.browser = browser;
 		setReqArgs( lo );
 		System.out.println("Required args are set to: " + this.toString() );
 	}
@@ -59,47 +58,47 @@ public class RequiredArgsList {
 	}
 	
 	public String toString() {
-	    return StringUtils.join( this.argsWrapper, token );
+	    return StringUtils.join( this.argsWrapper, "," );
 	}	
 
 	public String getBrowser() {
-        return browser;
+        return (String) argsWrapper.get(4);
     }
 
 	public Boolean getEnabled() {
-		return enabled;
+		return (Boolean) argsWrapper.get(0);
 	}
 
 	public String getTestName() {
-		return testName;
+		return (String) argsWrapper.get(1);
 	}
     
     public String getTestLocale() {
-		return testLocale;
+		return (String) argsWrapper.get(3);
 	}
 
 	public void setTestName( String testName ) {
-		this.testName = testName;
+		argsWrapper.set(1, testName );
 	}
 
-	public void setTestLocale( String locale ) {
-		this.testLocale = locale;
+	public void setTestLocale( String testLocale ) {
+		argsWrapper.set(3, testLocale );
 	}
 	
 	public void setEnabled( Boolean enabled ) {
-		this.enabled = enabled;
+		argsWrapper.set(0, enabled );
 	}
 
 	public void setEnvironment( String env ) {
-		this.environment = env;
+		argsWrapper.set(2, env );
 	}
 	
 	public void setBrowser( String browser ) {
-		this.browser = browser;
+		argsWrapper.set(4, browser );
 	}
 
 	public String getEnvironment() {
-		return environment;
+		return (String) argsWrapper.get(2);
 	}
 
 }

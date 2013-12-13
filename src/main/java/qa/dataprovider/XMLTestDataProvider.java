@@ -3,7 +3,9 @@ package qa.dataprovider;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import qa.dataprovider.def.OptionalArgsMap;
@@ -49,28 +51,40 @@ public class XMLTestDataProvider {
 	{
         TestSuite mySuite = new TestSuite( "Suite 1", "http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub" );
         
+        List<String> heroes1 = new ArrayList<String>();
+        heroes1.add("Wolverine");
+        heroes1.add("Batman");
+        heroes1.add("Superman");
+        
         Map<String, Object> oa1 = new HashMap<String, Object>();
         oa1.put( "url", "http://mywebsite1.com" );
         oa1.put( "username", "user1" );
         oa1.put( "password", "pass1" );
-        oa1.put( "verifies", "Wolverine, Batman, Superman" );
+        oa1.put( "verifies", heroes1 );
         oa1.put( "aNumber", new Double(99.99) );
         
         mySuite.add( new TestCase( new RequiredArgsList( true, "Test 1", "portal1", "Grid", "Firefox" ), new OptionalArgsMap( oa1 ) ) );
+        
+        List<String> heroes2 = new ArrayList<String>();
+        heroes2.add("Silver Surfer");
+        heroes2.add("Colossus");
+        heroes2.add("Phoenix");
         
         Map<String, Object> oa2 = new HashMap<String, Object>();
         oa2.put( "url", "http://mywebsite1.com" );
         oa2.put( "username", "user1" );
         oa2.put( "password", "pass1" );
-        oa2.put( "verifies", "Silver Surfer, Robin, Thing" );
+        oa2.put( "verifies", heroes2 );
         oa2.put( "aNumber", new Integer(99) );
         mySuite.add( new TestCase ( new RequiredArgsList( true, "Test 2", "portal2", "Grid", "Firefox" ), new OptionalArgsMap( oa2 ) ) );
         
         XStream xstream = new XStream();
         xstream.alias( "suite", TestSuite.class );
         xstream.alias( "test", TestCase.class );
-        xstream.addImplicitCollection( RequiredArgsList.class, "argsWrapper" );
-        xstream.addImplicitMap( OptionalArgsMap.class, "argsWrapper", "opts", Object.class, "argKey" );
+        xstream.alias( "required", RequiredArgsList.class );
+        xstream.alias( "optional", OptionalArgsMap.class );
+        //xstream.addImplicitCollection( RequiredArgsList.class, "argsWrapper" );
+        //xstream.addImplicitMap( OptionalArgsMap.class, "argsWrapper", "opts", Object.class, "argKey" );
         xstream.autodetectAnnotations(true);
         String xml = xstream.toXML( mySuite );
         System.out.println( xml );

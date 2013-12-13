@@ -8,6 +8,7 @@ public class TestCase {
     public TestCase( RequiredArgsList reqs, OptionalArgsMap opts ) {
         this.setReqArgs( reqs );
         this.setOptArgs( opts );
+        System.out.println();
     }    
 
 	public RequiredArgsList getReqArgs() {

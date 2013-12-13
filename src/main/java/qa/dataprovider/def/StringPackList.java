@@ -1,22 +1,18 @@
 package qa.dataprovider.def;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
 /**
  * A pack of strings sent as a single argument to a test.
- * @author austenjt
- *
  */
-public class StringPack implements Iterable<String> {
+public class StringPackList {
 
 	private List<String> pack;
 	private String token = ",";
 	
-	public StringPack() {
+	public StringPackList() {
 		pack = new ArrayList<String>();
 	}
 	
@@ -39,12 +35,6 @@ public class StringPack implements Iterable<String> {
 	
 	public String toString() {		
 		return StringUtils.join( pack, token );
-	}
-
-	@Override
-	public Iterator<String> iterator() {
-		Iterator<String> ipak = pack.iterator();
-		return ipak;
 	}
 	
 }

@@ -14,7 +14,7 @@ public class TestSuite {
         this.sauceURL = sauceUrl;
     }
 
-    public void add(TestCase test) {
+    public void add( TestCase test ) {
         tests.add( test );
     }
     
@@ -22,7 +22,7 @@ public class TestSuite {
         return tests;
     }
     
-    public String getSauceURL() {
+    public String getSauceUrl() {
 		return sauceURL;
 	}
 
@@ -60,10 +60,5 @@ public class TestSuite {
 	public int size() {
 		return tests.size();    	
     }
-
-	public void add(RequiredArgs requiredArgs, OptionalArgs optionalArgs) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

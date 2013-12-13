@@ -1,5 +1,42 @@
 <suite>
-  <suiteName>Test 1</suiteName>
+  <suiteName>Suite 1</suiteName>
   <sauceURL>http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub</sauceURL>
-  <tests/>
+  <tests>
+    <test>
+      <reqArgs>
+        <boolean>true</boolean>
+        <string>Test 1</string>
+        <string>portal1</string>
+        <string>Grid</string>
+        <string>Firefox</string>
+        <token>,</token>
+      </reqArgs>
+      <optArgs>
+        <opts class="double">99.99</opts>
+        <opts class="string">user1</opts>
+        <opts class="string">Wolverine, Batman, Superman</opts>
+        <opts class="string">pass1</opts>
+        <opts class="string">http://mywebsite1.com</opts>
+        <token>,</token>
+      </optArgs>
+    </test>
+    <test>
+      <reqArgs>
+        <boolean>true</boolean>
+        <string>Test 2</string>
+        <string>portal2</string>
+        <string>Grid</string>
+        <string>Firefox</string>
+        <token>,</token>
+      </reqArgs>
+      <optArgs>
+        <opts class="int">99</opts>
+        <opts class="string">user1</opts>
+        <opts class="string">Silver Surfer, Robin, Thing</opts>
+        <opts class="string">pass1</opts>
+        <opts class="string">http://mywebsite1.com</opts>
+        <token>,</token>
+      </optArgs>
+    </test>
+  </tests>
 </suite>

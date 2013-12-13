@@ -6,15 +6,15 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import qa.dataprovider.XMLTestDataProvider;
-import qa.dataprovider.def.OptionalArgs;
-import qa.dataprovider.def.RequiredArgs;
+import qa.dataprovider.def.OptionalArgsMap;
+import qa.dataprovider.def.RequiredArgsList;
 
 public class ParametersTest {
 	
 	private static String testData = "data-provider.xml";
 
 	@Test(dataProvider = "testdata")
-	public void printHorizontal( RequiredArgs reqArgs, OptionalArgs optArgs ) {
+	public void printHorizontal( RequiredArgsList reqArgs, OptionalArgsMap optArgs ) {
 		System.out.println("\n----------------\nPrint horizontal test:\n----------------");
 		System.out.println( "[ " + reqArgs.getEnabled() + ", " + reqArgs.getTestName() + ", " + reqArgs.getEnvironment() + ", " +
 		    reqArgs.getTestLocale() + ", " + reqArgs.getBrowser() + ", " + optArgs.getArgByIndex(0) + ", " 
@@ -24,7 +24,7 @@ public class ParametersTest {
 	}
 
 	@Test(dataProvider = "testdata")
-	public void printVertical( RequiredArgs reqArgs, OptionalArgs optArgs ) {
+	public void printVertical( RequiredArgsList reqArgs, OptionalArgsMap optArgs ) {
 		System.out.println("\n----------------\nPrint vertical test:\n----------------");
 		System.out.println("Test enabled: " + reqArgs.getEnabled() );
 		System.out.println("Test name: " + reqArgs.getTestName() );

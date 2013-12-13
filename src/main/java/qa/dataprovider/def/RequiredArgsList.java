@@ -1,12 +1,10 @@
 package qa.dataprovider.def;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 
-public class RequiredArgs implements Iterable<Object> {
+public class RequiredArgsList {
 	
 	private List<Object> argsWrapper;
 	private String token = ",";
@@ -14,14 +12,14 @@ public class RequiredArgs implements Iterable<Object> {
 	private Boolean enabled;
 	private String testName;
 	private String environment;
-	private String testLocale;
+	private String testLocale; // grid or local
 	private String browser;
 	
-	public RequiredArgs() {
+	public RequiredArgsList() {
 		setReqArgs( new ArrayList<Object>() );
 	}
 	
-	public RequiredArgs( Boolean en, String name, String env, String locale, String browser ) {
+	public RequiredArgsList( Boolean en, String name, String env, String locale, String browser ) {
 		List<Object> lo = new ArrayList<Object>();
 		lo.add( en );
 		lo.add( name );
@@ -92,11 +90,5 @@ public class RequiredArgs implements Iterable<Object> {
 	public String getEnvironment() {
 		return environment;
 	}
-
-	@Override
-	public Iterator<Object> iterator() {
-		Iterator<Object> ireq = argsWrapper.iterator();
-		return ireq;
-	}	
 
 }

@@ -3,72 +3,34 @@
 <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>XML XSL Example</title>
 <style type="text/css">
-body
-{
-margin:10px;
-background-color:#ccff00;
-font-family:verdana,helvetica,sans-serif;
-}
-
-.tutorial-name
-{
-display:block;
-font-weight:bold;
-}
-
-.tutorial-url
-{
-display:block;
-color:#636363;
-font-size:small;
-font-style:italic;
-}
-</style>
+					table, td, th
+					{
+					border:1px solid green;
+					}
+					th
+					{
+					background-color:green;
+					color:white;
+					}
+				</style>
 </head>
 <body>
 <h2>Test Suite</h2>
-<p>The test suite!</p>
   Suite 1
   http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub
-  <span class="test">
-      
-        
-          true
-          Test 1
-          portal1
-          Grid
-          Firefox
-        
-      
-      
-        
-          
-            aNumber
-            99.99
-          
-          
-            username
-            user1
-          
-          
-            verifies
-            
-              Wolverine
-              Batman
-              Superman
-            
-          
-          
-            password
-            pass1
-          
-          
-            url
-            http://mywebsite1.com
-          
-        
-      
-    </span><span class="required"></span><span class="optional"></span>
+  <h2>My Tests</h2>
+<table border="1">
+<tr>
+<th>enabled</th><th>testname</th><th>environment</th><th>testLocale</th><th>browser</th><th>arg</th><th>arg</th><th>arg</th><th>arg</th><th>arg</th>
+</tr>
+<tr>
+<td>trueTest 1</td><td>aNumber</td><td>username</td><td>verifies</td><td>password</td><td>url</td>
+</tr>
+<tr>
+<td>trueTest 2</td><td>aNumber</td><td>username</td><td>verifies</td><td>password</td><td>url</td>
+</tr>
+</table>
+<h4>The End.</h4>
 
 </body>
 </html>

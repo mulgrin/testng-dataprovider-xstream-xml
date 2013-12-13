@@ -17,15 +17,23 @@ public class RequiredArgsList {
 	
 	public RequiredArgsList() {
 		setReqArgs( new ArrayList<Object>() );
+		for ( int i = 0; i < 5; i++ ) {
+			argsWrapper.set(i, "nUll");
+		}
 	}
 	
 	public RequiredArgsList( Boolean en, String name, String env, String locale, String browser ) {
 		List<Object> lo = new ArrayList<Object>();
 		lo.add( en );
+		this.enabled = en;
 		lo.add( name );
+		this.testName = name;
 		lo.add( env );
+		this.environment = env;
 		lo.add( locale );
+		this.testLocale = locale;
 		lo.add( browser );
+		this.browser = browser;
 		setReqArgs( lo );
 		System.out.println("Required args are set to: " + this.toString() );
 	}
@@ -41,14 +49,17 @@ public class RequiredArgsList {
 	public void reset() {
 		this.argsWrapper = null; // garbage collect
 		this.argsWrapper = new ArrayList<Object>();
+		for ( int i = 0; i < 5; i++ ) {
+			argsWrapper.set(i, "nUll");
+		}
 	}
 	
 	public int size() {
 		return this.argsWrapper.size();
 	}
 	
-	public String toString() {		
-		return StringUtils.join( this.argsWrapper, token );
+	public String toString() {
+	    return StringUtils.join( this.argsWrapper, token );
 	}	
 
 	public String getBrowser() {

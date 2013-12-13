@@ -10,6 +10,11 @@
         <string>Grid</string>
         <string>Firefox</string>
         <token>,</token>
+        <enabled>true</enabled>
+        <testName>Test 1</testName>
+        <environment>portal1</environment>
+        <testLocale>Grid</testLocale>
+        <browser>Firefox</browser>
       </reqArgs>
       <optArgs>
         <opts class="double">99.99</opts>
@@ -28,6 +33,11 @@
         <string>Grid</string>
         <string>Firefox</string>
         <token>,</token>
+        <enabled>true</enabled>
+        <testName>Test 2</testName>
+        <environment>portal2</environment>
+        <testLocale>Grid</testLocale>
+        <browser>Firefox</browser>
       </reqArgs>
       <optArgs>
         <opts class="int">99</opts>

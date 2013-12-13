@@ -33,7 +33,9 @@ public class ParametersTest {
 		System.out.println("Browser: " + reqArgs.getBrowser() );
 		System.out.println("App URL: " + optArgs.getArgByIndex(0) );
 		System.out.println("Username: " + optArgs.getArgByIndex(1) );
-		System.out.println("Verify: " + StringUtils.join( optArgs.getArgByIndex(2), "," ) );
+		System.out.println("Password: " + optArgs.getArgByIndex(2) );		
+		System.out.println("Verify: " + StringUtils.join( optArgs.getArgByIndex(3), "," ) );
+		System.out.println("A number: " + optArgs.getArgByIndex(4) );
 		System.out.println("----------------\nFinished printVertical test.\n");
 	}
 

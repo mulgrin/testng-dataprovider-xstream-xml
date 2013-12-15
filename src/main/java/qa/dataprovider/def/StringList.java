@@ -7,34 +7,33 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * A pack of strings sent as a single argument to a test.
  */
-public class StringPackList {
+public class StringList {
 
-	private List<String> pack;
-	private String token = ",";
+	private List<String> list;
 	
-	public StringPackList() {
-		pack = new ArrayList<String>();
+	public StringList() {
+		list = new ArrayList<String>();
 	}
 	
 	public void addString( String tokenizedString ) {
-		pack.add( tokenizedString.trim() );
+		list.add( tokenizedString.trim() );
 	}
 
 	public List<String> getPack() {
-		return pack;
+		return list;
 	}
 
 	public void setPack(List<String> items) {
-		this.pack = items;
+		list = items;
 	}
 	
 	public void reset() {
-		pack = null;
-		pack = new ArrayList<String>();
+		list = null;
+		list = new ArrayList<String>();
 	}
 	
 	public String toString() {		
-		return StringUtils.join( pack, token );
+		return StringUtils.join( list, "," );
 	}
 	
 }

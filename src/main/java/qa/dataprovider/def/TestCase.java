@@ -1,30 +1,21 @@
 package qa.dataprovider.def;
 
+
 public class TestCase {
 
-	private RequiredArgsList reqArgs;
-	private OptionalArgsMap optArgs;
+	private TestArgs testArgs;
 	
-    public TestCase( RequiredArgsList reqs, OptionalArgsMap opts ) {
-        this.setReqArgs( reqs );
-        this.setOptArgs( opts );
+    public TestCase( TestArgs testargs ) {
+        setTestArgs( testargs );
         System.out.println();
     }    
 
-	public RequiredArgsList getReqArgs() {
-		return reqArgs;
-	}
-	
-	public OptionalArgsMap getOptArgs() {
-		return optArgs;
+	public TestArgs getTestArgs() {
+		return testArgs;
 	}
 
-	public void setReqArgs( RequiredArgsList reqs ) {
-		this.reqArgs = reqs;
-	}
-    
-    private void setOptArgs( OptionalArgsMap opts ) {
-    	this.optArgs = opts;		
+	public void setTestArgs( TestArgs list ) {
+		testArgs = list;
 	}
 
 }

@@ -3,82 +3,24 @@
   <sauceURL>http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub</sauceURL>
   <tests>
     <test>
-      <reqArgs>
-        <argsWrapper>
-          <boolean>true</boolean>
-          <string>Test 1</string>
-          <string>portal1</string>
-          <string>Grid</string>
-          <string>Firefox</string>
-        </argsWrapper>
-      </reqArgs>
-      <optArgs>
-        <argsWrapper>
-          <entry>
-            <string>aNumber</string>
-            <double>99.99</double>
-          </entry>
-          <entry>
-            <string>username</string>
-            <string>user1</string>
-          </entry>
-          <entry>
-            <string>verifies</string>
-            <list>
-              <string>Wolverine</string>
-              <string>Batman</string>
-              <string>Superman</string>
-            </list>
-          </entry>
-          <entry>
-            <string>password</string>
-            <string>pass1</string>
-          </entry>
-          <entry>
-            <string>url</string>
-            <string>http://mywebsite1.com</string>
-          </entry>
-        </argsWrapper>
-      </optArgs>
+      <testArgs>
+        <arg key="enabled" type="java.lang.Boolean">true</arg>
+        <arg key="testname" type="java.lang.String">Test 1</arg>
+        <arg key="environment" type="java.lang.String">portal1</arg>
+        <arg key="testlocale" type="java.lang.String">Grid</arg>
+        <arg key="browser" type="java.lang.String">Firefox</arg>
+        <arg key="url" type="java.lang.String">http://google.com</arg>
+      </testArgs>
     </test>
     <test>
-      <reqArgs>
-        <argsWrapper>
-          <boolean>true</boolean>
-          <string>Test 2</string>
-          <string>portal2</string>
-          <string>Grid</string>
-          <string>Firefox</string>
-        </argsWrapper>
-      </reqArgs>
-      <optArgs>
-        <argsWrapper>
-          <entry>
-            <string>aNumber</string>
-            <int>99</int>
-          </entry>
-          <entry>
-            <string>username</string>
-            <string>user1</string>
-          </entry>
-          <entry>
-            <string>verifies</string>
-            <list>
-              <string>Silver Surfer</string>
-              <string>Colossus</string>
-              <string>Phoenix</string>
-            </list>
-          </entry>
-          <entry>
-            <string>password</string>
-            <string>pass1</string>
-          </entry>
-          <entry>
-            <string>url</string>
-            <string>http://mywebsite1.com</string>
-          </entry>
-        </argsWrapper>
-      </optArgs>
+      <testArgs>
+        <arg key="enabled" type="java.lang.Boolean">true</arg>
+        <arg key="testname" type="java.lang.String">Test 2</arg>
+        <arg key="environment" type="java.lang.String">portal2</arg>
+        <arg key="testlocale" type="java.lang.String">Local</arg>
+        <arg key="browser" type="java.lang.String">Chrome</arg>
+        <arg key="url" type="java.lang.String">http://yelp.com</arg>
+      </testArgs>
     </test>
   </tests>
 </suite>

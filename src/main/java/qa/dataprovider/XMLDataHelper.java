@@ -3,62 +3,60 @@ package qa.dataprovider;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import qa.dataprovider.def.OptionalArgsMap;
-import qa.dataprovider.def.TestArgs;
-import qa.dataprovider.def.TestCase;
-import qa.dataprovider.def.TestSuite;
+import qa.dataprovider.def.ArgObject;
+import qa.dataprovider.def.TestArguments;
+import qa.dataprovider.def.TestRow;
+import qa.dataprovider.def.SuiteData;
 
 import com.thoughtworks.xstream.XStream;
 
-public class XMLTestDataProvider {
+public class XMLDataHelper {
 	
-	private TestSuite testSuite;
+	private SuiteData testSuite;
 
-	public XMLTestDataProvider( String fileName ) {		
+	public XMLDataHelper( String fileName ) {		
 		File testXML = new File( fileName );
         if ( !testXML.exists() ) {
-        	System.out.println("Generating new default test data in xml file '" + fileName +  "'..." );
+        	System.out.println("Generating new default test data in xml file '" + fileName +  "'." );
         	try {
 				testXML.createNewFile();
 				createDefaultSuiteFile( testXML );
-			} catch (IOException e) {
+			} catch ( IOException e ) {
 				e.printStackTrace();
 			}
         } else {
-        	System.out.println("Loading test data from xml file '" + fileName +  "'..." );
+        	System.out.println("Loading test data from xml file '" + fileName +  "'." );
         	XStream xStream = new XStream();
-    		xStream.alias("suite", TestSuite.class);
-            xStream.alias("test", TestCase.class);
-            xStream.alias( "args", TestArgs.class );
+    		xStream.alias("suite", SuiteData.class);
+            xStream.alias("test", TestRow.class);
+            xStream.alias( "args", TestArguments.class );
+            xStream.alias( "arg",  ArgObject.class );
             xStream.autodetectAnnotations(true);
     		Object readObject = xStream.fromXML( testXML );
-    		testSuite = (TestSuite)readObject;
+    		testSuite = (SuiteData)readObject;
         }
 	}	
 	
 	public void createDefaultSuiteFile( File testXML ) 
 	{
-        TestSuite mySuite = new TestSuite( "Suite 1", "http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub" );
+		System.out.println("Calling createDefaultSuiteFile()...");
+        SuiteData mySuite = new SuiteData( "Suite 1", "http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub" );
         
-        TestArgs tArgs1 = new TestArgs( "true", "Test 1", "portal1", "Grid", "Firefox" );
+        TestArguments tArgs1 = new TestArguments( "true", "Test 1", "portal1", "Grid", "Firefox" );
         tArgs1.addTestArgument( "url", "java.lang.String", "http://google.com" );
-        TestCase tCase1 = new TestCase( tArgs1 );
+        TestRow tCase1 = new TestRow( tArgs1 );
         mySuite.add( tCase1 );
         
-        TestArgs tArgs2 = new TestArgs( "true", "Test 2", "portal2", "Local", "Chrome" );
+        TestArguments tArgs2 = new TestArguments( "true", "Test 2", "portal2", "Local", "Chrome" );
         tArgs2.addTestArgument( "url", "java.lang.String", "http://yelp.com" );
-        TestCase tCase2 = new TestCase( tArgs2 );
+        TestRow tCase2 = new TestRow( tArgs2 );
         mySuite.add( tCase2 );
         
         XStream xstream = new XStream();
-        xstream.alias( "suite", TestSuite.class );
-        xstream.alias( "test", TestCase.class );
-        xstream.alias( "args", TestArgs.class );
+        xstream.alias( "suite", SuiteData.class );
+        xstream.alias( "test", TestRow.class );
+        xstream.alias( "args", TestArguments.class );
+        xstream.alias( "arg", ArgObject.class );
         xstream.autodetectAnnotations(true);
         String xml = xstream.toXML( mySuite );
         System.out.println( xml );
@@ -98,17 +96,18 @@ public class XMLTestDataProvider {
 	 * Should return an Object[][] or Iterator<Object[]> data type
 	 * @return
 	 */
-    public Object[][] getCompactData() { 
-    	Object[][] array = new Object[testSuite.size()][2];
-    	for ( int i = 0; i < testSuite.size(); i++ ) {
-    		TestArgs targs = getTestArgsByIndex(i);
-    		array[i][0] = targs.getRawTestArguments();
+    public Object[][] getArgumentsArrays() { 
+    	Object[][] array = new Object[testSuite.size()][1];
+    	int testCount = 0;
+    	for ( TestRow ta : testSuite ) {
+    		array[testCount][0] = ta.getTestArgs();
+    		testCount++;
     	}
-    	System.out.println("Input array size is: " + array.length + " x " + array[0].length );
     	return array;
     }
     
-	private TestArgs getTestArgsByIndex( int testIdx ) {
+    //TODO method might be redundant
+	private TestArguments getTestArgsByIndex( int testIdx ) {
 		return testSuite.getAllTests().get( testIdx ).getTestArgs();
 	}
 	

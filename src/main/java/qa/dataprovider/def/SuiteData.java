@@ -1,24 +1,25 @@
 package qa.dataprovider.def;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
-public class TestSuite {
+public class SuiteData implements Iterable<TestRow> {
 
     private String suiteName;
     private String sauceURL;
-    private List<TestCase> tests = new ArrayList<TestCase>();
+    private List<TestRow> tests = new ArrayList<TestRow>();
 
-    public TestSuite( String sName, String sauceUrl ) {
+    public SuiteData( String sName, String sauceUrl ) {
         this.suiteName = sName;
         this.sauceURL = sauceUrl;
     }
 
-    public void add( TestCase test ) {
+    public void add( TestRow test ) {
         tests.add( test );
     }
     
-    public List<TestCase> getAllTests() {
+    public List<TestRow> getAllTests() {
         return tests;
     }
     
@@ -30,35 +31,33 @@ public class TestSuite {
 		return suiteName;
 	}
     
-    public TestCase getTestByIndex( int idx ) {
+    public TestRow getTestByIndex( int idx ) {
     	if ( idx > tests.size() || idx < 0 ) {
     		throw new IndexOutOfBoundsException("Index " + idx + " was beyond the range of " + tests.size() + " test cases." );
     	}
     	return tests.get( idx );
     }
 
-	public TestCase getTestByName( String name ) {
-    	boolean found = false;
-    	String testName = "null";
-    	TestCase test = null;
-    	for ( TestCase tc: tests ) {
-    		testName = tc.getReqArgs().getTestName();
+	public TestRow getTestByName( String name ) {
+    	for ( TestRow tr: tests ) {
+    		String testName = tr.getTestArgs().getTestName();
     		if ( testName.equalsIgnoreCase( name ) ) {
-    			found = true;
-    			test = tc;
-    			break;
+    			System.out.println("Found test by its name: " + testName );
+        		return tr;
     		}
     	}
-    	if ( found == false ) {
-    		return null;
-    	} else {
-    		System.out.println("Found test by its name: " + testName );
-    		return test;
-    	}
+    	return null;
     }
 
 	public int size() {
 		return tests.size();    	
     }
+
+	@Override
+	public Iterator<TestRow> iterator() {
+		Iterator<TestRow> itests = tests.iterator();
+        return itests; 
+
+	}
 
 }

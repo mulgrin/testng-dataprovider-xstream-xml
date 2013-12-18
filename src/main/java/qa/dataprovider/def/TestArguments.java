@@ -5,8 +5,10 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
+@XStreamAlias("args")
 public class TestArguments {
 	
 	@XStreamImplicit

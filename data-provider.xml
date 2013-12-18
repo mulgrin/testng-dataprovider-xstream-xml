@@ -3,24 +3,48 @@
   <sauceURL>http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub</sauceURL>
   <tests>
     <test>
-      <testArgs>
-        <arg key="enabled" type="java.lang.Boolean">true</arg>
-        <arg key="testname" type="java.lang.String">Test 1</arg>
-        <arg key="environment" type="java.lang.String">portal1</arg>
-        <arg key="testlocale" type="java.lang.String">Grid</arg>
-        <arg key="browser" type="java.lang.String">Firefox</arg>
-        <arg key="url" type="java.lang.String">http://google.com</arg>
-      </testArgs>
+      <rowArgs>
+        <part>
+          <enabled type="java.lang.Boolean">true</enabled>
+        </part>
+        <part>
+          <testname type="java.lang.String">Test 1</testname>
+        </part>
+        <part>
+          <environment type="java.lang.String">portal1</environment>
+        </part>
+        <part>
+          <testlocale type="java.lang.String">Grid</testlocale>
+        </part>
+        <part>
+          <browser type="java.lang.String">Firefox</browser>
+        </part>
+        <part>
+          <url type="java.lang.String">http://google.com</url>
+        </part>
+      </rowArgs>
     </test>
     <test>
-      <testArgs>
-        <arg key="enabled" type="java.lang.Boolean">true</arg>
-        <arg key="testname" type="java.lang.String">Test 2</arg>
-        <arg key="environment" type="java.lang.String">portal2</arg>
-        <arg key="testlocale" type="java.lang.String">Local</arg>
-        <arg key="browser" type="java.lang.String">Chrome</arg>
-        <arg key="url" type="java.lang.String">http://yelp.com</arg>
-      </testArgs>
+      <rowArgs>
+        <part>
+          <enabled type="java.lang.Boolean">true</enabled>
+        </part>
+        <part>
+          <testname type="java.lang.String">Test 2</testname>
+        </part>
+        <part>
+          <environment type="java.lang.String">portal2</environment>
+        </part>
+        <part>
+          <testlocale type="java.lang.String">Local</testlocale>
+        </part>
+        <part>
+          <browser type="java.lang.String">Chrome</browser>
+        </part>
+        <part>
+          <url type="java.lang.String">http://yelp.com</url>
+        </part>
+      </rowArgs>
     </test>
   </tests>
 </suite>

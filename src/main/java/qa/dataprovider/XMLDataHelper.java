@@ -3,7 +3,7 @@ package qa.dataprovider;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import qa.dataprovider.def.ArgObject;
+
 import qa.dataprovider.def.TestArguments;
 import qa.dataprovider.def.TestRow;
 import qa.dataprovider.def.SuiteData;
@@ -27,10 +27,6 @@ public class XMLDataHelper {
         } else {
         	System.out.println("Loading test data from xml file '" + fileName +  "'." );
         	XStream xStream = new XStream();
-    		xStream.alias("suite", SuiteData.class);
-            xStream.alias("test", TestRow.class);
-            xStream.alias( "args", TestArguments.class );
-            xStream.alias( "arg",  ArgObject.class );
             xStream.autodetectAnnotations(true);
     		Object readObject = xStream.fromXML( testXML );
     		testSuite = (SuiteData)readObject;
@@ -53,10 +49,6 @@ public class XMLDataHelper {
         mySuite.add( tCase2 );
         
         XStream xstream = new XStream();
-        xstream.alias( "suite", SuiteData.class );
-        xstream.alias( "test", TestRow.class );
-        xstream.alias( "args", TestArguments.class );
-        xstream.alias( "arg", ArgObject.class );
         xstream.autodetectAnnotations(true);
         String xml = xstream.toXML( mySuite );
         System.out.println( xml );

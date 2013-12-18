@@ -1,8 +1,11 @@
 package qa.dataprovider.def;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+
+@XStreamAlias("test")
 public class TestRow {
 
-	private TestArguments testArgs;
+	private TestArguments rowArgs;
 	
     public TestRow( TestArguments testargs ) {
         setTestArgs( testargs );
@@ -10,11 +13,11 @@ public class TestRow {
     }    
 
 	public TestArguments getTestArgs() {
-		return testArgs;
+		return rowArgs;
 	}
 
 	public void setTestArgs( TestArguments list ) {
-		testArgs = list;
+		rowArgs = list;
 	}
 
 }

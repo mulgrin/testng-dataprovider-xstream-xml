@@ -4,21 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
+import com.thoughtworks.xstream.annotations.XStreamConverter;
 
 @XStreamAlias("test")
+@XStreamConverter(value = TestConverter.class)
 public class TestRow {
 
-	@XStreamImplicit
 	private List<TestArguments> rowArgs = new ArrayList<TestArguments>();
-	
+
     public TestRow( TestArguments testargs ) {
         setTestArgs( testargs );
         System.out.println();
-    }    
+  }
 
-	public TestArguments getTestArgs() {
-		return rowArgs.get(0);
+  List<TestArguments> getArguments() {
+    return this.rowArgs;
+  }
+
+  public TestArguments getTestArgs() {
+    return rowArgs.get(0);
 	}
 
 	public void setTestArgs( TestArguments list ) {

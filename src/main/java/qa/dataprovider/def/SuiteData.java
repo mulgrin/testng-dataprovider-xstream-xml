@@ -21,11 +21,11 @@ public class SuiteData implements Iterable<TestRow> {
     public void add( TestRow test ) {
         tests.add( test );
     }
-    
+
     public List<TestRow> getAllTests() {
         return tests;
     }
-    
+
     public String getSauceUrl() {
 		return sauceURL;
 	}
@@ -33,7 +33,7 @@ public class SuiteData implements Iterable<TestRow> {
     public String getSuiteName() {
 		return suiteName;
 	}
-    
+
     public TestRow getTestByIndex( int idx ) {
     	if ( idx > tests.size() || idx < 0 ) {
     		throw new IndexOutOfBoundsException("Index " + idx + " was beyond the range of " + tests.size() + " test cases." );
@@ -53,13 +53,13 @@ public class SuiteData implements Iterable<TestRow> {
     }
 
 	public int size() {
-		return tests.size();    	
+    return tests.size();
     }
 
 	@Override
 	public Iterator<TestRow> iterator() {
 		Iterator<TestRow> itests = tests.iterator();
-        return itests; 
+    return itests;
 
 	}
 

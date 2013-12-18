@@ -6,19 +6,17 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 
 import com.thoughtworks.xstream.annotations.XStreamAlias;
-import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 @XStreamAlias("args")
 public class TestArguments {
-	
-	@XStreamImplicit
-	private List<ArgObject> argsWrapper = new ArrayList<ArgObject>(); 
-	
+
+  private List<ArgObject> argsWrapper = new ArrayList<ArgObject>();
+
 	public TestArguments() {
 		System.out.println("New TestArguments object with default required arguments.");
 		reset();
 	}
-	
+
 	public TestArguments( String en, String name, String env, String locale, String browser ) {
 		System.out.println("Creating new TestArguments object...");
 		setEnabled( en );
@@ -32,7 +30,7 @@ public class TestArguments {
 	public List<ArgObject> getAllTestArguments() {
 		return argsWrapper;
 	}
-	
+
 	public String getRawTestArguments() {
 		List<String> list = new ArrayList<String>();
 		for ( ArgObject x : argsWrapper ) {
@@ -44,9 +42,9 @@ public class TestArguments {
 	public void setTestArguments( List<ArgObject> lo ) {
 		argsWrapper = lo;
 	}
-	
+
 	public void reset() {
-		argsWrapper = null; // garbage collect
+    argsWrapper = new ArrayList<ArgObject>();
 		setTestArguments( new ArrayList<List<String>>() );
 		setEnabled( "false" );
 		setTestName( "default" );
@@ -54,17 +52,18 @@ public class TestArguments {
 		setTestLocale( "Grid" ); // or Local
 		setBrowser( "Firefox" );
 	}
-	
+
 	private void setTestArguments(ArrayList<List<String>> arrayList) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public int testSize() {
 		return argsWrapper.size();
 	}
-	
-	public String toString() {
+
+	@Override
+  public String toString() {
 		String[] joined = new String[argsWrapper.size()];
 		int count = 0;
 		for ( ArgObject x : argsWrapper ) {
@@ -76,7 +75,7 @@ public class TestArguments {
 			count++;
 		}
 		return "[" + StringUtils.join( joined, ", " ) + "]";
-	}	
+  }
 
 	/* Helpers to get values from test arguments. */
 
@@ -97,7 +96,7 @@ public class TestArguments {
 			throw new IllegalArgumentException("The variable '" + val.getKey() + "' must be a " + val.getType() + " for value '" + val.getVal() + "'.");
 		}
 	}
-	
+
 	public String getEnvironment() {
 		ArgObject val = argsWrapper.get(2);
 		if ( val.getType().equalsIgnoreCase("java.lang.String") ) {
@@ -106,7 +105,7 @@ public class TestArguments {
 			throw new IllegalArgumentException("The variable '" + val.getKey() + "' must be a " + val.getType() + " for value '" + val.getVal() + "'.");
 		}
 	}
-    
+
     public String getTestLocale() {
     	ArgObject val = argsWrapper.get(3);
 		if ( val.getType().equalsIgnoreCase("java.lang.String") ) {
@@ -114,7 +113,7 @@ public class TestArguments {
 		} else {
 			throw new IllegalArgumentException("The variable '" + val.getKey() + "' must be a " + val.getType() + " for value '" + val.getVal() + "'.");
 		}
-	}    
+  }
 
 	public String getBrowser() {
 		ArgObject val = argsWrapper.get(4);
@@ -124,9 +123,9 @@ public class TestArguments {
 			throw new IllegalArgumentException("The variable '" + val.getKey() + "' must be a " + val.getType() + " for value '" + val.getVal() + "'.");
 		}
     }
-	
+
 	/* Helpers to set test argument values */
-	
+
 	public void setEnabled( String enabled ) {
 		String en;
 		if ( enabled.equalsIgnoreCase("true") || enabled.equalsIgnoreCase("Y") ) {
@@ -153,7 +152,7 @@ public class TestArguments {
 			argsWrapper.set( 1, val );
 		}
 		System.out.println("Set '" + val.getKey() + "' value at index 1 to '" + val.getVal() + "' with type of '" + val.getType() + "'." );
-	}	
+  }
 
 	public void setEnvironment( String env ) {
 		ArgObject val = new ArgObject( "environment", "java.lang.String", env );
@@ -174,7 +173,7 @@ public class TestArguments {
 		}
 		System.out.println("Set '" + val.getKey() + "' value at index 3 to '" + val.getVal() + "' with type of '" + val.getType() + "'." );
 	}
-	
+
 	public void setBrowser( String browser ) {
 		ArgObject val = new ArgObject( "browser", "java.lang.String", browser );
 		if ( argsWrapper.size() < 5 ) {
@@ -184,7 +183,7 @@ public class TestArguments {
 		}
 		System.out.println("Set '" + val.getKey() + "' value at index 4 to '" + val.getVal() + "' with type of '" + val.getType() + "'." );
 	}
-	
+
 	public void addTestArgument( String propName, String type, String propVal ) {
 		System.out.println("Adding optional test property named '" + propName + "' with value of '" + propVal + "' and with type of '" + type + "'." );
 		ArgObject val = new ArgObject( propName, type, propVal );

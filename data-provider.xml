@@ -3,7 +3,7 @@
   <sauceURL>http://username-string:access-key-string@ondemand.saucelabs.com:80/wd/hub</sauceURL>
   <tests>
     <test>
-      <rowArgs>
+      <args>
         <arg>
           <enabled type="java.lang.Boolean">true</enabled>
         </arg>
@@ -22,10 +22,10 @@
         <arg>
           <url type="java.lang.String">http://google.com</url>
         </arg>
-      </rowArgs>
+      </args>
     </test>
     <test>
-      <rowArgs>
+      <args>
         <arg>
           <enabled type="java.lang.Boolean">true</enabled>
         </arg>
@@ -44,7 +44,7 @@
         <arg>
           <url type="java.lang.String">http://yelp.com</url>
         </arg>
-      </rowArgs>
+      </args>
     </test>
   </tests>
 </suite>

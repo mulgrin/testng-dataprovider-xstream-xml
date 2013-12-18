@@ -1,11 +1,16 @@
 package qa.dataprovider.def;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicit;
 
 @XStreamAlias("test")
 public class TestRow {
 
-	private TestArguments rowArgs;
+	@XStreamImplicit
+	private List<TestArguments> rowArgs = new ArrayList<TestArguments>();
 	
     public TestRow( TestArguments testargs ) {
         setTestArgs( testargs );
@@ -13,11 +18,15 @@ public class TestRow {
     }    
 
 	public TestArguments getTestArgs() {
-		return rowArgs;
+		return rowArgs.get(0);
 	}
 
 	public void setTestArgs( TestArguments list ) {
-		rowArgs = list;
+		if ( rowArgs.size() == 0 ) {
+			rowArgs.add( list );
+		} else {
+		    rowArgs.set( 0,  list );
+	    }
 	}
 
 }

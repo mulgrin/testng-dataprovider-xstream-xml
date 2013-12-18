@@ -3,12 +3,12 @@ package qa.dataprovider.def;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamConverter;
 
-/** 
+/** A node value that should look like this.
  *  <key type="string value">val</key>
  */
 
 @XStreamAlias("arg")
-@XStreamConverter(value=ArgConverter.class, strings={"val"})
+@XStreamConverter(value=ArgConverter.class)
 public class ArgObject {
 	
 	private String key;	

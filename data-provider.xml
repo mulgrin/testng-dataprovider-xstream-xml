@@ -4,46 +4,46 @@
   <tests>
     <test>
       <rowArgs>
-        <part>
+        <arg>
           <enabled type="java.lang.Boolean">true</enabled>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <testname type="java.lang.String">Test 1</testname>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <environment type="java.lang.String">portal1</environment>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <testlocale type="java.lang.String">Grid</testlocale>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <browser type="java.lang.String">Firefox</browser>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <url type="java.lang.String">http://google.com</url>
-        </part>
+        </arg>
       </rowArgs>
     </test>
     <test>
       <rowArgs>
-        <part>
+        <arg>
           <enabled type="java.lang.Boolean">true</enabled>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <testname type="java.lang.String">Test 2</testname>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <environment type="java.lang.String">portal2</environment>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <testlocale type="java.lang.String">Local</testlocale>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <browser type="java.lang.String">Chrome</browser>
-        </part>
-        <part>
+        </arg>
+        <arg>
           <url type="java.lang.String">http://yelp.com</url>
-        </part>
+        </arg>
       </rowArgs>
     </test>
   </tests>
